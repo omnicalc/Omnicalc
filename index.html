@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniCalc Ultra - 20-in-1 Hub</title>
+    <style>
+        :root { --primary: #2563eb; --secondary: #10b981; --bg: #f8fafc; --text: #1e293b; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 10px; }
+        .container { max-width: 650px; margin: auto; }
+        .header { text-align: center; padding: 20px 0; border-bottom: 2px solid #e2e8f0; margin-bottom: 20px; }
+        .logo { font-size: 32px; font-weight: 900; letter-spacing: -1.5px; }
+        .logo span { color: var(--primary); }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
+        h2 { font-size: 17px; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px; }
+        .icon { width: 30px; height: 30px; background: #eff6ff; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 15px; }
+        label { display: block; margin: 10px 0 4px; font-size: 12px; font-weight: 700; color: #64748b; }
+        input { width: 100%; padding: 10px; border: 2px solid #f1f5f9; border-radius: 10px; box-sizing: border-box; font-size: 15px; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 10px; background: var(--primary); color: white; font-weight: 700; margin-top: 12px; cursor: pointer; }
+        .res { margin-top: 12px; padding: 12px; background: #f0fdf4; border-radius: 10px; display: none; text-align: center; font-weight: 800; color: #166534; border: 1px solid #dcfce7; }
+        .cat { font-size: 9px; text-transform: uppercase; color: #94a3b8; font-weight: 900; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header"><div class="logo">Omni<span>Calc</span> Pro</div><p>The Ultimate 20-in-1 Tool Hub</p></div>
+    <div class="grid">
+        <div class="card"><div class="cat">Finance</div><h2><span class="icon">💱</span> USD to LKR</h2><input type="number" id="in1" placeholder="USD"><button onclick="r1()">Convert</button><div id="d1" class="res"></div></div>
+        <div class="card"><div class="cat">Finance</div><h2><span class="icon">₿</span> Crypto Profit</h2><label>Inv</label><input type="number" id="in2_1"><label>Buy</label><input type="number" id="in2_2"><label>Sell</label><input type="number" id="in2_3"><button onclick="r2()">Calculate</button><div id="d2" class="res"></div></div>
+        <div class="card"><div class="cat">Finance</div><h2><span class="icon">🧾</span> VAT/Tax</h2><label>Amt</label><input type="number" id="in3_1"><label>%</label><input type="number" id="in3_2"><button onclick="r3()">Calculate</button><div id="d3" class="res"></div></div>
+        <div class="card"><div class="cat">Finance</div><h2><span class="icon">🏠</span> Loan EMI</h2><label>Principal</label><input type="number" id="in4_1"><label>Int %</label><input type="number" id="in4_2"><label>Months</label><input type="number" id="in4_3"><button onclick="r4()">Calculate</button><div id="d4" class="res"></div></div>
+        <div class="card"><div class="cat">Shopping</div><h2><span class="icon">🏷️</span> Discount</h2><label>Price</label><input type="number" id="in5_1"><label>Off %</label><input type="number" id="in5_2"><button onclick="r5()">Get Price</button><div id="d5" class="res"></div></div>
+        <div class="card"><div class="cat">Marketing</div><h2><span class="icon">📢</span> CPM</h2><label>Cost</label><input type="number" id="in6_1"><label>Imp</label><input type="number" id="in6_2"><button onclick="r6()">Calculate</button><div id="d6" class="res"></div></div>
+        <div class="card"><div class="cat">Marketing</div><h2><span class="icon">🖱️</span> CTR</h2><label>Clicks</label><input type="number" id="in7_1"><label>Imp</label><input type="number" id="in7_2"><button onclick="r7()">Calculate</button><div id="d7" class="res"></div></div>
+        <div class="card"><div class="cat">Business</div><h2><span class="icon">📈</span> ROI</h2><label>Inv</label><input type="number" id="in8_1"><label>Ret</label><input type="number" id="in8_2"><button onclick="r8()">Calculate</button><div id="d8" class="res"></div></div>
+        <div class="card"><div class="cat">Business</div><h2><span class="icon">💰</span> Margin</h2><label>Cost</label><input type="number" id="in9_1"><label>Sell</label><input type="number" id="in9_2"><button onclick="r9()">Calculate</button><div id="d9" class="res"></div></div>
+        <div class="card"><div class="cat">Health</div><h2><span class="icon">🏃</span> BMI</h2><label>Kg</label><input type="number" id="in10_1"><label>Cm</label><input type="number" id="in10_2"><button onclick="r10()">Check</button><div id="d10" class="res"></div></div>
+        <div class="card"><div class="cat">Science</div><h2><span class="icon">🧪</span> Molarity</h2><label>Moles</label><input type="number" id="in11_1"><label>Vol(L)</label><input type="number" id="in11_2"><button onclick="r11()">Calculate</button><div id="d11" class="res"></div></div>
+        <div class="card"><div class="cat">Science</div><h2><span class="icon">💧</span> Dilution</h2><label>C1</label><input type="number" id="in12_1"><label>C2</label><input type="number" id="in12_2"><label>V2</label><input type="number" id="in12_3"><button onclick="r12()">Find V1</button><div id="d12" class="res"></div></div>
+        <div class="card"><div class="cat">Science</div><h2><span class="icon">⚖️</span> Mol Weight</h2><label>Mass</label><input type="number" id="in13_1"><label>Moles</label><input type="number" id="in13_2"><button onclick="r13()">Calculate</button><div id="d13" class="res"></div></div>
+        <div class="card"><div class="cat">Health</div><h2><span class="icon">💧</span> Daily Water</h2><label>Weight(kg)</label><input type="number" id="in14"><button onclick="r14()">Calculate Liters</button><div id="d14" class="res"></div></div>
+        <div class="card"><div class="cat">Finance</div><h2><span class="icon">💸</span> Tip Calc</h2><label>Bill</label><input type="number" id="in15_1"><label>Tip%</label><input type="number" id="in15_2"><button onclick="r15()">Calculate</button><div id="d15" class="res"></div></div>
+        <div class="card"><div class="cat">Tools</div><h2><span class="icon">📏</span> Inch to Cm</h2><input type="number" id="in16"><button onclick="r16()">Convert</button><div id="d16" class="res"></div></div>
+        <div class="card"><div class="cat">Tools</div><h2><span class="icon">🚗</span> Km to Miles</h2><input type="number" id="in17"><button onclick="r17()">Convert</button><div id="d17" class="res"></div></div>
+        <div class="card"><div class="cat">Tools</div><h2><span class="icon">⛽</span> Fuel Cost</h2><label>Km</label><input type="number" id="in18_1"><label>Price/L</label><input type="number" id="in18_2"><label>Km/L</label><input type="number" id="in18_3"><button onclick="r18()">Calculate</button><div id="d18" class="res"></div></div>
+        <div class="card"><div class="cat">Finance</div><h2><span class="icon">💹</span> Interest</h2><label>P</label><input type="number" id="in19_1"><label>R%</label><input type="number" id="in19_2"><label>Y</label><input type="number" id="in19_3"><button onclick="r19()">Calculate</button><div id="d19" class="res"></div></div>
+        <div class="card"><div class="cat">Math</div><h2><span class="icon">√</span> Square Root</h2><input type="number" id="in20"><button onclick="r20()">Calculate</button><div id="d20" class="res"></div></div>
+    </div>
+</div>
+<script>
+    function s(i,t){let e=document.getElementById(i);e.style.display="block";e.innerText=t}
+    function r1(){let a=document.getElementById('in1').value;s('d1',"Value: රු. "+(a*300).toLocaleString())}
+    function r2(){let i=document.getElementById('in2_1').value,b=document.getElementById('in2_2').value,l=document.getElementById('in2_3').value;s('d2',"Profit: "+((i/b)*l-i).toFixed(2))}
+    function r3(){let a=parseFloat(document.getElementById('in3_1').value),p=parseFloat(document.getElementById('in3_2').value);s('d3',"Total: "+(a+(a*p/100)).toFixed(2))}
+    function r4(){let p=document.getElementById('in4_1').value,r=(document.getElementById('in4_2').value/12)/100,n=document.getElementById('in4_3').value;let e=p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);s('d4',"Monthly: "+e.toFixed(2))}
+    function r5(){let p=document.getElementById('in5_1').value,o=document.getElementById('in5_2').value;s('d5',"Pay: "+(p-(p*o/100)).toFixed(2))}
+    function r6(){let c=document.getElementById('in6_1').value,i=document.getElementById('in6_2').value;s('d6',"CPM: "+((c/i)*1000).toFixed(2))}
+    function r7(){let c=document.getElementById('in7_1').value,i=document.getElementById('in7_2').value;s('d7',"CTR: "+((c/i)*100).toFixed(2)+"%")}
+    function r8(){let i=document.getElementById('in8_1').value,r=document.getElementById('in8_2').value;s('d8',"ROI: "+(((r-i)/i)*100).toFixed(2)+"%")}
+    function r9(){let c=document.getElementById('in9_1').value,l=document.getElementById('in9_2').value;s('d9',"Margin: "+(((l-c)/l)*100).toFixed(2)+"%")}
+    function r10(){let w=document.getElementById('in10_1').value,h=document.getElementById('in10_2').value/100;s('d10',"BMI: "+(w/(h*h)).toFixed(1))}
+    function r11(){let m=document.getElementById('in11_1').value,v=document.getElementById('in11_2').value;s('d11',"Molarity: "+(m/v).toFixed(3))}
+    function r12(){let c1=document.getElementById('in12_1').value,c2=document.getElementById('in12_2').value,v2=document.getElementById('in12_3').value;s('d12',"V1: "+((c2*v2)/c1).toFixed(2))}
+    function r13(){let m=document.getElementById('in13_1').value,n=document.getElementById('in13_2').value;s('d13',"Mol Weight: "+(m/n).toFixed(2))}
+    function r14(){let w=document.getElementById('in14').value;s('d14',"Liters: "+(w*0.033).toFixed(1)+"L")}
+    function r15(){let b=parseFloat(document.getElementById('in15_1').value),t=parseFloat(document.getElementById('in15_2').value);s('d15',"Tip: "+(b*t/100).toFixed(2))}
+    function r16(){let i=document.getElementById('in16').value;s('d16',"Cm: "+(i*2.54).toFixed(2))}
+    function r17(){let k=document.getElementById('in17').value;s('d17',"Miles: "+(k*0.621).toFixed(2))}
+    function r18(){let d=document.getElementById('in18_1').value,p=document.getElementById('in18_2').value,m=document.getElementById('in18_3').value;s('d18',"Cost: රු. "+((d/m)*p).toFixed(2))}
+    function r19(){let p=document.getElementById('in19_1').value,r=document.getElementById('in19_2').value,y=document.getElementById('in19_3').value;s('d19',"Interest: "+(p*r*y/100).toFixed(2))}
+    function r20(){let v=document.getElementById('in20').value;s('d20',"Result: "+Math.sqrt(v).toFixed(2))}
+</script>
+</body>
+</html>
