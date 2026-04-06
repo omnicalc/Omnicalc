@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniCalc Pro - 10-in-1 Tool Hub</title>
+    <style>
+        :root { --primary: #2563eb; --secondary: #10b981; --accent: #f59e0b; --bg: #f8fafc; --text: #1e293b; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 15px; }
+        .container { max-width: 650px; margin: auto; }
+        .header { text-align: center; padding: 25px 0; border-bottom: 2px solid #e2e8f0; margin-bottom: 25px; }
+        .logo { font-size: 36px; font-weight: 900; letter-spacing: -1.5px; }
+        .logo span { color: var(--primary); }
+        .lang-switch { display: flex; justify-content: flex-end; margin-bottom: 15px; }
+        select { padding: 8px 12px; border-radius: 10px; border: 1.5px solid #cbd5e1; font-weight: 600; cursor: pointer; }
+        
+        .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .card { background: white; padding: 25px; border-radius: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid #f1f5f9; }
+        h2 { font-size: 19px; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: var(--text); }
+        .icon { width: 35px; height: 35px; background: #eff6ff; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 18px; }
+
+        label { display: block; margin: 12px 0 5px; font-size: 13px; font-weight: 700; color: #64748b; }
+        input { width: 100%; padding: 12px; border: 2px solid #f1f5f9; border-radius: 12px; box-sizing: border-box; font-size: 16px; background: #f8fafc; transition: 0.2s; }
+        input:focus { border-color: var(--primary); background: white; outline: none; }
+        
+        button { width: 100%; padding: 14px; border: none; border-radius: 12px; background: var(--primary); color: white; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 15px; transition: 0.3s; }
+        button:hover { opacity: 0.9; transform: translateY(-2px); }
+        .res { margin-top: 15px; padding: 15px; background: #f0fdf4; border-radius: 12px; display: none; text-align: center; font-weight: 800; color: #166534; border: 1px solid #dcfce7; }
+        
+        .cat-tag { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 5px; font-weight: 900; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="lang-switch">
+        <select id="lang" onchange="updateUI()">
+            <option value="en">English</option>
+            <option value="si">සිංහල</option>
+        </select>
+    </div>
+
+    <div class="header">
+        <div class="logo">Omni<span>Calc</span></div>
+        <p id="tagline" style="color:#64748b; font-size: 14px; margin-top: 5px;">The Professional 10-in-1 Hub</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="cat-tag">Marketing</div>
+            <h2><span class="icon">📢</span> CPM Calculator</h2>
+            <label id="l1_1">Total Cost</label><input type="number" id="cpmCost">
+            <label id="l1_2">Impressions</label><input type="number" id="cpmImp">
+            <button onclick="runCPM()" id="b1">Calculate CPM</button>
+            <div id="r1" class="res"></div>
+        </div>
+
+        <div class="card">
+            <div class="cat-tag">Marketing</div>
+            <h2><span class="icon">🖱️</span> CTR Calculator</h2>
+            <label id="l2_1">Total Clicks</label><input type="number" id="ctrClick">
+            <label id="l2_2">Total Impressions</label><input type="number" id="ctrImp">
+            <button onclick="runCTR()" id="b2">Calculate CTR</button>
+            <div id="r2" class="res"></div>
+        </div>
+
+        <div class="card">
+            <div class="cat-tag">Business</div>
+            <h2><span class="icon">📈</span> ROI Calculator</h2>
+            <label id="l3_1">Investment</label><input type="number" id="roiInv">
+            <label id="l3_2">Return</label><input type="number" id="roiRet">
+            <button onclick="runROI()" id="b3">Calculate ROI</button>
+            <div id="r3" class="res"></div>
+        </div>
+
+        <div class="card">
+            <div class="cat-tag">Business</div>
+            <h2><span class="icon">💰</span> Profit Margin</h2>
+            <label id="l4_1">Cost Price</label><input type="number" id="mCost">
+            <label id="l4_2">Selling Price</label><input type="number" id="mSell">
+            <button onclick="runMargin()" id="b4">Calculate Margin</button>
+            <div id="r4" class="res"></div>
+        </div>
+
+        <div class="card">
+            <div class="cat-tag">Science</div>
+            <h2><span class="icon">🧪</span> Molarity</h2>
+            <label id="l5_1">Moles</label><input type="number" id="molM">
+            <label id="l5_2">Volume (Liters)</label><input type="number" id="molV">
+            <button onclick="runMol()" id="b5">Calculate Molarity</button>
+            <div id="r5" class="res"></div>
+        </div>
+
+        <div class="card">
+            <div class="cat-tag">Science</div>
+            <h2><span class="icon">💧</span> Dilution (C1V1 = C2V2)</h2>
+            <label id="l6_1">Initial Conc (C1)</label><input type="number" id="c1">
+            <label id="l6_2">Final Conc (C2)</label><input type="number" id="c2">
+            <label id="l6_3">Final Vol (V2)</label><input type="number" id="v2">
+            <button onclick="runDil()" id="b6">Calculate V1 (Initial Vol)</button>
+            <div id="r6" class="res"></div>
+        </div>
+
+        <div class="card">
+            <div class="cat-tag">Science</div>
+            <h2><span class="icon">⚖️</span> Molecular Weight</h2>
+            <p style="font-size: 12px; color: #64748b;">(Enter Mass & Moles to find Molar Mass)</p>
+            <label id="l7_1">Mass (g)</label><input type="number" id="mwMass">
+            <label id="l7_2">Amount (moles)</label><input type="number" id="mwMol">
+            <button onclick="runMW()" id="b7">Calculate Molar Mass</button>
+            <div id="r7" class="res"></div>
+        </div>
+
+        <div class="card">
+            <div class="cat-tag">Finance</div>
+            <h2><span class="icon">₿</span> Crypto Profit</h2>
+            <label id="l8_1">Investment</label><input type="number" id="crInv">
+            <label id="l8_2">Buy Price</label><input type="number" id="crBuy">
+            <label id="l8_3">Sell Price</label><input type="number" id="crSell">
+            <button onclick="runCrypto()" id="b8">Calculate Profit</button>
+            <div id="r8" class="res"></div>
+        </div>
+
+        <div class="card">
+            <div class="cat-tag">Finance</div>
+            <h2><span class="icon">🧾</span> Tax / VAT</h2>
+            <label id="l9_1">Amount</label><input type="number" id="tAmt">
+            <label id="l9_2">Tax %</label><input type="number" id="tPerc">
+            <button onclick="runTax()" id="b9">Calculate Total</button>
+            <div id="r9" class="res"></div>
+        </div>
+
+        <div class="card">
+            <div class="cat-tag">Health</div>
+            <h2><span class="icon">🏃</span> BMI Calculator</h2>
+            <label id="l10_1">Weight (kg)</label><input type="number" id="bmiW">
+            <label id="l10_2">Height (cm)</label><input type="number" id="bmiH">
+            <button onclick="runBMI()" id="b10">Check BMI</button>
+            <div id="r10" class="res"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Simple Logic Functions
+    function show(id, text) { let el = document.getElementById(id); el.style.display = "block"; el.innerText = text; }
+
+    function runCPM() {
+        let c = parseFloat(document.getElementById('cpmCost').value);
+        let i = parseFloat(document.getElementById('cpmImp').value);
+        if(i>0) show('r1', "CPM: " + ((c/i)*1000).toFixed(2));
+    }
+
+    function runCTR() {
+        let c = parseFloat(document.getElementById('ctrClick').value);
+        let i = parseFloat(document.getElementById('ctrImp').value);
+        if(i>0) show('r2', "CTR: " + ((c/i)*100).toFixed(2) + "%");
+    }
+
+    function runROI() {
+        let i = parseFloat(document.getElementById('roiInv').value);
+        let r = parseFloat(document.getElementById('roiRet').value);
+        if(i>0) show('r3', "ROI: " + (((r-i)/i)*100).toFixed(2) + "%");
+    }
+
+    function runMargin() {
+        let cp = parseFloat(document.getElementById('mCost').value);
+        let sp = parseFloat(document.getElementById('mSell').value);
+        if(sp>0) show('r4', "Margin: " + (((sp-cp)/sp)*100).toFixed(2) + "%");
+    }
+
+    function runMol() {
+        let m = parseFloat(document.getElementById('molM').value);
+        let v = parseFloat(document.getElementById('molV').value);
+        if(v>0) show('r5', "Molarity: " + (m/v).toFixed(3) + " mol/L");
+    }
+
+    function runDil() {
+        let c1 = parseFloat(document.getElementById('c1').value);
+        let c2 = parseFloat(document.getElementById('c2').value);
+        let v2 = parseFloat(document.getElementById('v2').value);
+        if(c1>0) show('r6', "Required V1: " + ((c2*v2)/c1).toFixed(3));
+    }
+
+    function runMW() {
+        let m = parseFloat(document.getElementById('mwMass').value);
+        let n = parseFloat(document.getElementById('mwMol').value);
+        if(n>0) show('r7', "Molar Mass: " + (m/n).toFixed(2) + " g/mol");
+    }
+
+    function runCrypto() {
+        let inv = parseFloat(document.getElementById('crInv').value);
+        let bp = parseFloat(document.getElementById('crBuy').value);
+        let sp = parseFloat(document.getElementById('crSell').value);
+        if(bp>0) show('r8', "Profit: " + ((inv/bp)*sp - inv).toFixed(2));
+    }
+
+    function runTax() {
+        let a = parseFloat(document.getElementById('tAmt').value);
+        let p = parseFloat(document.getElementById('tPerc').value);
+        show('r9', "Total: " + (a + (a*p/100)).toFixed(2));
+    }
+
+    function runBMI() {
+        let w = parseFloat(document.getElementById('bmiW').value);
+        let h = parseFloat(document.getElementById('bmiH').value)/100;
+        if(h>0) show('r10', "BMI: " + (w/(h*h)).toFixed(1));
+    }
+
+    function updateUI() {
+        let l = document.getElementById('lang').value;
+        document.getElementById('tagline').innerText = (l === 'si') ? "වෘත්තීය 10-in-1 ගණක මධ්‍යස්ථානය" : "The Professional 10-in-1 Hub";
+        // (You can add more Sinhala translations for labels here)
+    }
+</script>
+
+</body>
+</html>
